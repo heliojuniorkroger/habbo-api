@@ -12,7 +12,7 @@ defmodule HabboApi.Router.Authentication do
 
         if res.data == [] do
             res = %User{
-                username: body["username"],
+                username: User.get_username,
                 email: body["email"],
                 password: body["password"] |> Comeonin.Bcrypt.hashpwsalt
             } |> User.create
@@ -57,7 +57,7 @@ defmodule HabboApi.Router.Authentication do
 
         user = if res.data == [] do
                 res = %User{
-                    username: body["id"],
+                    username: User.get_username,
                     email: body["email"],
                     fb_id: body["id"]
                 } |> User.create

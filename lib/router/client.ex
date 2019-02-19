@@ -2,7 +2,7 @@ defmodule HabboApi.Router.Client do
     import Plug.Conn
     alias HabboApi.Models.User, as: User
 
-    @client_url "http://localhost:8080"
+    @client_url "http://localhost:5050"
 
     def url(conn) do
         hash = "hbbr-#{Nanoid.generate}"

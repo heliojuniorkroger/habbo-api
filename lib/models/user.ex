@@ -1,4 +1,6 @@
 defmodule HabboApi.Models.User do
+    @username_generator_url "https://usernamegenerator.herokuapp.com"
+
     defstruct username: nil,
     password: nil,
     email: nil,
@@ -7,6 +9,12 @@ defmodule HabboApi.Models.User do
     gender: "M",
     credits: 100,
     registered_at: Timex.now |> Timex.to_unix
+
+    def get_username() do
+        response = @username_generator_url |> HTTPoison.get!
+        body = response.body |> Poison.decode!
+        body["username"]
+    end
 
     def create(user) do
         RethinkDB.Query.table("users")
